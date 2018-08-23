@@ -19,16 +19,10 @@ public abstract class AbstractShape {
 
     abstract double getArea();
 
-    public Color getColor() {
-        return color;
-    }
-
     public String toString(){
         ColorUtils colorUtils = new ColorUtils();
         return "Figure is " + this.getClass().getSimpleName()
                           + ". Color: " + colorUtils.getColorNameFromRgb(color.getRed(), color.getGreen(), color.getBlue())
                           + ". Area: " + getArea() + " sq. units. ";
     }
-
-
 }

@@ -15,20 +15,19 @@ public class Main {
 
         Random rand = new Random();
 
-        AbstractShape[] array = new AbstractShape[(rand.nextInt(maxShapesQuantity)+1)];
+        AbstractShape[] abstractShapes = new AbstractShape[(rand.nextInt(maxShapesQuantity) + 1)];
 
         Map<Integer, RandParamShapesCreator> shape = new LinkedHashMap<>();
-        shape.put(1, new CreateCircle());
-        shape.put(2, new CreateSquare());
-        shape.put(3, new CreateTrapezoid());
-        shape.put(4, new CreateTriangle());
+        shape.put(1, new CircleCreator());
+        shape.put(2, new SquareCreator());
+        shape.put(3, new TrapezoidCreator());
+        shape.put(4, new TriangleCreator());
 
-
-        for(int i = 0; i < array.length; i++) {
-            array[i] = shape.get(rand.nextInt(shape.size())+1).CreateShape();
+        for(int i = 0; i < abstractShapes.length; i++) {
+            abstractShapes[i] = shape.get(rand.nextInt(shape.size())+1).CreateShape();
         }
-        System.out.println("Total amount of shapes: " + array.length + ".");
-        for(AbstractShape i : array) {
+        System.out.println("Total amount of shapes: " + abstractShapes.length + ".");
+        for(AbstractShape i : abstractShapes) {
             //System.out.println(i.toString());
             System.out.println(pretty(i.toString()));
         }
@@ -46,7 +45,7 @@ public class Main {
         Matcher matcher = pattern.matcher(source);
         int i = 0;
         while (matcher.find()) {
-            pretty.append(source.split("\\d+.\\d+")[i]).append(source.substring(matcher.start(), matcher.end() + digitsAfterComma)); //reduced to two digits after comma
+            pretty.append(source.split("\\d+.\\d+")[i]).append(source, matcher.start(), matcher.end() + digitsAfterComma); //reduced to two digits after comma
             i++;
         }
         pretty.append(source.split("\\d+.\\d+")[i]);
